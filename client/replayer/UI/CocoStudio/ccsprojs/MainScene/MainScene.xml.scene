@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<SceneProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\ccsprojs\MainScene</ProjectDir>
+  <Version>1.5.0.0</Version>
+  <Resources>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI</Resources>
+  <Name>MainScene</Name>
+  <JsonFileName>MainScene.json</JsonFileName>
+  <JsonFolder>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\assets\publish</JsonFolder>
+  <JsonList />
+  <CanvasSize>
+    <Width>1024</Width>
+    <Height>768</Height>
+  </CanvasSize>
+  <filePath>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\ccsprojs\MainScene\MainScene.xml.scene</filePath>
+  <ProjectType>SceneProject</ProjectType>
+  <ResRelativePath>\\..\\..\\assets</ResRelativePath>
+  <JSFileList />
+  <DefaultUI_JSList />
+  <Res>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\assets</Res>
+</SceneProject>

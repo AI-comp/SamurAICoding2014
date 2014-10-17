@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGuidesProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GuidesProject>
+    <Project>DatePanel</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Cursor</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>DateScreen</Project>
+    <GuidesList />
+  </GuidesProject>
+</ArrayOfGuidesProject>

@@ -1,0 +1,1 @@
+start npm start & timeout /nobreak /t 10 & rundll32.exe url.dll,FileProtocolHandler "http://localhost:8000/"

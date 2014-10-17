@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>C:\Users\Seiji\Repositories\JavaChallenge2014\client\replayer\UI\CocoStudio\ccsprojs\HeroinePanel</ProjectDir>
+  <Version>1.5.0.0</Version>
+  <Resources>C:\Users\Seiji\Repositories\JavaChallenge2014\client\replayer\UI\CocoStudio\assets</Resources>
+  <Name>HeroinePanel</Name>
+  <JsonFileName>HeroinePanel.json</JsonFileName>
+  <JsonFolder>C:\Users\Seiji\Repositories\JavaChallenge2014\client\replayer\UI\CocoStudio\ccsprojs\HeroinePanel\Json</JsonFolder>
+  <JsonList>
+    <string>HeroinePanel.json</string>
+    <string>HeartLovePanel.json</string>
+    <string>BarLovePanel.json</string>
+  </JsonList>
+  <CanvasSize>
+    <Width>172</Width>
+    <Height>40</Height>
+  </CanvasSize>
+  <filePath>C:\Users\Seiji\Repositories\JavaChallenge2014\client\replayer\UI\CocoStudio\ccsprojs\HeroinePanel\HeroinePanel.xml.ui</filePath>
+  <ProjectType>UIProject</ProjectType>
+  <ResRelativePath>\\..\\..\\assets</ResRelativePath>
+  <imageFileList />
+  <imagePngList>
+    <string>dummy.png</string>
+  </imagePngList>
+  <JsonSuffix>.json</JsonSuffix>
+  <CurrentUIJson>HeroinePanel.json</CurrentUIJson>
+</UIProject>

@@ -1,0 +1,28 @@
+{
+    "project_type": "javascript",
+
+    "debugMode" : 1,
+    "showFPS" : false,
+    "frameRate" : 60,
+    "id" : "gameCanvas",
+    "renderMode" : 2,
+    "engineDir":"cocos2d-html5",
+
+    "modules" : [
+        "cocos2d",
+        "cocostudio"
+    ],
+
+    "jsList" : [
+        "src/resource.js",
+        "src/replayerScene.js",
+        "src/informationScene.js",
+        "src/resultScene.js",
+        "src/mainScene.js",
+        "src/dateScene.js",
+        "src/lovePanel.js",
+        "src/heartLovePanel.js",
+        "src/barLovePanel.js",
+        "src/popularityBarManager.js"
+    ]
+}

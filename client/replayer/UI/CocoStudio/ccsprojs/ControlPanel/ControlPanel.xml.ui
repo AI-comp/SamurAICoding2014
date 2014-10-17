@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\ccsprojs\ControlPanel</ProjectDir>
+  <Version>1.5.0.0</Version>
+  <Resources>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\assets</Resources>
+  <Name>ControlPanel</Name>
+  <JsonFileName>ControlPanel.json</JsonFileName>
+  <JsonFolder>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\ccsprojs\ControlPanel\Json</JsonFolder>
+  <JsonList>
+    <string>ControlPanel.json</string>
+  </JsonList>
+  <CanvasSize>
+    <Width>224</Width>
+    <Height>168</Height>
+  </CanvasSize>
+  <filePath>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\ccsprojs\ControlPanel\ControlPanel.xml.ui</filePath>
+  <ProjectType>UIProject</ProjectType>
+  <ResRelativePath>\\..\\..\\assets</ResRelativePath>
+  <imageFileList />
+  <imagePngList>
+    <string>control/proceed.png</string>
+    <string>control/proceed_pressed.png</string>
+    <string>control/proceed_disabled.png</string>
+    <string>control/next.png</string>
+    <string>control/next_pressed.png</string>
+    <string>control/next_disabled.png</string>
+    <string>control/last.png</string>
+    <string>control/last_pressed.png</string>
+    <string>control/last_disabled.png</string>
+    <string>control/previous.png</string>
+    <string>control/previous_pressed.png</string>
+    <string>control/previous_disabled.png</string>
+    <string>control/first.png</string>
+    <string>control/first_pressed.png</string>
+    <string>control/first_disabled.png</string>
+    <string>control/heart.png</string>
+    <string>control/heart_pressed.png</string>
+    <string>control/heart_disabled.png</string>
+    <string>control/bar.png</string>
+    <string>control/bar_pressed.png</string>
+    <string>control/bar_disabled.png</string>
+  </imagePngList>
+  <JsonSuffix>.json</JsonSuffix>
+  <CurrentUIJson>ControlPanel.json</CurrentUIJson>
+</UIProject>

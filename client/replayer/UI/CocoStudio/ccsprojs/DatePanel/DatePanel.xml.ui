@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\ccsprojs\DatePanel</ProjectDir>
+  <Version>1.5.0.0</Version>
+  <Resources>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\assets</Resources>
+  <Name>DatePanel</Name>
+  <JsonFileName>DatePanel.json</JsonFileName>
+  <JsonFolder>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\ccsprojs\DatePanel\Json</JsonFolder>
+  <JsonList>
+    <string>DatePanel.json</string>
+    <string>Cursor.json</string>
+    <string>DateScreen.json</string>
+  </JsonList>
+  <CanvasSize>
+    <Width>512</Width>
+    <Height>384</Height>
+  </CanvasSize>
+  <filePath>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\ccsprojs\DatePanel\DatePanel.xml.ui</filePath>
+  <ProjectType>UIProject</ProjectType>
+  <ResRelativePath>\\..\\..\\assets</ResRelativePath>
+  <imageFileList />
+  <imagePngList />
+  <JsonSuffix>.json</JsonSuffix>
+  <CurrentUIJson>DateScreen.json</CurrentUIJson>
+</UIProject>

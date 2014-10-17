@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<GameProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI</ProjectDir>
+  <Version>1.5.0.0</Version>
+  <Resources>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI</Resources>
+  <Name>Replayer</Name>
+  <JsonFileName>Replayer.json</JsonFileName>
+  <JsonList />
+  <CanvasSize>
+    <Width>480</Width>
+    <Height>320</Height>
+  </CanvasSize>
+  <filePath>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\Replayer.xml.ccsproj</filePath>
+  <ProjectType>GameProject</ProjectType>
+  <ResRelativePath />
+  <ResProjFolder>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\ccsprojs</ResProjFolder>
+  <AssetsDir>C:\Users\Seiji\Repositories\AILovers\client\replayer\UI\CocoStudio\assets</AssetsDir>
+  <LanaguageType>cpp</LanaguageType>
+</GameProject>

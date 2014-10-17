@@ -1,0 +1,29 @@
+html
+    head
+        link(rel='stylesheet', href='/lib/bootstrap/bootstrap.min.css')
+        link(rel='stylesheet', href='/css/app.css')
+    body
+        - for (var i=0; i<4; i++) {
+            div
+                label(for='ai'+i) AI #{i}
+                input(id='ai'+i, type='text', value='node SampleAI/JavaScript/SampleAI.js')
+                label(for='dir'+i) Working Dir
+                input(id='dir'+i, type='text', value='.')
+        - }
+        div
+            label(for='seed') Seed
+            input(id='seed', type='text', value='')
+            span (leave blank to use a random value)
+
+        div
+            button#runGame Run Game
+
+        div(style='white-space: nowrap')
+            div.box#log(style='float:left; width:400px; height:770px;')
+            iframe#replayer(src='' style='width:1030px; height:770px;' scrolling='no')
+        div(style='clear:both')
+
+        script(src='/lib/jquery/jquery.min.js')
+        script(src='/lib/underscore/underscore.js')
+        script(src='/js/app.js')
+        
