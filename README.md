@@ -1,9 +1,8 @@
-# Lang Wars 2 - AI Challenge @ CODE FESTIVAL 2014
+# Negotiate and Conquer - SamurAI Coding 2014
 
-Web Sites
+Web Site
 
-- http://www.ai-comp.net/codefestival2014/
-- http://recruit-jinji.jp/code_fes2014/
+- http://samuraicoding.info/
 
 ## For Participants
 

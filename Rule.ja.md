@@ -1,88 +1,59 @@
-# Lang Wars 2 - AI Challenge @ CODE FESTIVAL 2014
+# Negotiate and Conquer: SamurAI Coding 2014 ゲームルール
 
-## ストーリー
+## 概要
 
-第一次プログラミング言語宗教戦争では、CJC (Colorful Jumbo Chicken) がJavaとPHPの加護を受け法王となった。
-CJCによって言語宗教戦争は終結したかのように見えた・・・が、宗教戦争の引き金となった9言語
-(C++, C#, Java, JavaScript, Python, Ruby, PHP, OCaml, Haskell)に反旗を翻す言語が現れた。
-
-懐かしのあの言語から、今をときめくあの言語がまさかの参戦！
-CJCに代わり第二次宗教線でプログラミング言語界を制する法王になるのは誰だ？！
-
-## ルールの疑似コード
-
-自然言語よりコードをご希望の方に向けて、[ルールの疑似コード](#PseudoCode)を用意した。
+あなたは戦国大名。
+旗幟を鮮明にしない中立の領主たちを交渉で味方に引き入れて、勝利を手にしろ！
 
 ## ゲームの目的
 
-各 _プログラミング言語_ の _信者数_ によって決まる _勝利点_ を、他の _プレイヤー_ より多く得る。
+_中立領主_はそれぞれの兵力を持つ。各_大名_は_交渉_を通じて各領主と親密になろうとする。
+各大名の_総兵力_は、_親密度_最大となった領主の_兵力_の計から、親密度最小となってしまった領主の兵力の計を引いたものになる。
+最大の総兵力を持つ大名がゲームの勝者となる。
 
-## ゲームの大まかな流れ
+## ゲームの進行
 
-プレイヤーは4人、プログラミング言語は6種類ある。
+末尾にゲームの進行を司るシステムの[擬似コード](#PseudoCode)も掲げています。
 
-このゲームはターン制であり、各ターンごとに、プレイヤーたちは好きなプログラミング言語を _布教_ して信者を集める。
-布教の情報は一部が隠されているため、他のプレイヤーとの駆け引きが重要となる。
+### 初期状態
 
-9ターンでゲームが終了し、プレイヤーたちはそれぞれのプログラミング言語に対する信者数に応じて勝利点を得る。
-各プログラミング言語の信者数が最も多いプレイヤーはその言語に対する勝利点を得るが、信者数が最も少ないプレイヤーは勝利点を失ってしまう。
-したがって、目当てのプログラミング言語を積極的に布教して他プレイヤーより多くの信者を集めつつ、
-他のプログラミング言語に対する信者数にも気を使って失点を防ぐことが重要である。
-勝利点を最も多く獲得したプレイヤーの勝利となる。
+大名は4人、中立領主は6人いる。
+プレイヤは大名を制御する。
+各中立領主の兵力は 3, 4, 5, 6 のいずれかの値にランダムに設定され、開示される。
 
-## ゲームの開始
+### ターンと交渉
 
-ゲームが開始すると、まずそれぞれのプログラミング言語に _注目度_ が3から6の間でランダムに設定され、プレイヤーに公開される。
-注目度が高いプログラミング言語ほど、ゲーム終了時に得られる（または失う）勝利点が多くなる。
+ゲームは_昼ターン_と_夜ターン_を繰り返す9ターンからなる。
+最初は昼ターンである。
 
-## ターンの流れ
+各ターンで大名は中立領主を選択し交渉する。
+交渉は昼ターンには5回、夜ターンには2回行う。
+同一ターンで同じ中立領主と何回交渉してもよい。
+昼ターンでは大名が領主と交渉した回数、夜ターンでは大名が領主と交渉した回数の2倍、その大名と領主の親密度が向上する。
+全ターンでの親密度向上の合計が、その大名と領主との親密度となる。
 
-ターンには _平日_ ターンと _休日_ ターンが存在する。
-1ターン目は平日であり、1ターンごとに平日と休日が入れ替わる。
-つまり、2ターンで一週間となる。
+昼ターンの後には、どの大名がどの領主と何度交渉したのかが、すべて開示される。
+夜ターンの後には、各領主が受けた交渉の回数のみを開示し、どの大名が交渉したのかは秘密にされる。
 
-ターンが始まると、プレイヤーたちは一斉に布教する言語を選ぶ。
-平日では1ターンで5回（5日分）布教をするが、休日では1ターンに2回（2日分）布教する。
-1回の布教では1種類の言語を布教し、自分の布教した言語に対する信者数が1増える。
-ただし、休日は1回の布教につき信者数が2増える。
-1ターン中の布教言語の割り振りは自由である。
-例えば平日であれば、バラバラの5言語を1回ずつ布教しても良いし、同じ言語を5回布教しても良い。
-なお、布教言語が他のプレイヤーと同じであっても、信者数の増加に影響はない。
+### 秘匿情報の中間開示
 
-全プレイヤーが布教言語を選んだら、各プログラミング言語に対する信者数が計算される。
-そのターンが平日の場合、誰がどの言語を布教したかが全員に公開される。
-そのターンが休日の場合、各プログラミング言語について、その言語がそのターンに布教された合計回数のみ公開される。
+第5ターン(3回目の昼ターン)の終了時に、秘匿されていたそれまでの2度の夜ターンにどの大名がどの領主と交渉したかの情報が開示される。
 
-下の表は、平日と休日の布教の特徴をまとめたものである。
+## ゲームの勝敗
 
-|                     | 平日 | 休日 |
-| ------------------- | ---- | ---- |
-| 布教回数            | 5    | 2    |
-| 1回の布教で増える信者数 | 1       | 2       |
-| 布教情報の公開       | 全情報公開 | 各言語に対する布教の回数のみ公開 |
+各大名の総兵力は、第9ターンの終了後に親密度最大となった領主の兵力の計から、親密度最小となってしまった領主の兵力の計を引いたものになる。
+最大の総兵力を持つ大名がゲームの勝者となる。
 
-なお、5ターン目の終了時に、各プレイヤーがそれまでに獲得した信者数が休日ぶんも含めて公開される。
-
-## ゲームの終了
-
-9ターン目が終わると、ゲームが終了し、勝利点の計算に入る。
-
-各プログラミング言語で得られる勝利点は、そのプログラミング言語に対する信者数を他のプレイヤーと比べて決められる。
-そのプログラミング言語に対する信者数が全プレイヤー中で最も高い場合は、注目度と同じ点数の勝利点を得る。
-逆に全プレイヤー中で最も低い場合は、注目度と同じ点数の勝利点を失う。
-トップや最下位のプレイヤーが複数いる場合は、注目度をそれらのプレイヤーの人数で割った点数だけ得点あるいは失点する。
-
-各プレイヤーの勝利点をすべてのプログラミング言語に対して計算したら、最も勝利点の高いプレイヤーを勝者とする。
-最も勝利点の高いプレイヤーが複数いる場合は、そのゲームは引き分けである。
+ある領主について親密度最大あるいは最小の大名が複数ある場合、領主の兵力を最大/最小の大名の数で割ったものが各大名の総兵力に加算/減算される。
 
 ## AIの入出力形式
 
 AIはゲーム開始時に実行される。
 ゲームを始める準備ができたら`READY`と出力したのち、ゲームの設定を入力として受け取る。
-また、ターンごとに現在の情報を入力として受け取り、そのターンでの布教言語を出力する。
+また、ターンごとに現在の情報を入力として受け取り、そのターンでの交渉相手を出力する。
 
 AIの思考時間には制限がある。
-制限時間を超過するとAIプログラムが強制的に停止され、それ以降の行動が「全日程で0番のプログラミング言語を布教する」として処理される。
+制限時間を超過するとAIプログラムが強制的に停止され、それ以降のターンの行動は全て「0番の領主と交渉する」として処理される。
 
 ### 準備完了メッセージの出力形式
 
@@ -94,65 +65,70 @@ AIの思考時間には制限がある。
 ゲーム開始時、つまり1ターン目の初めに、ゲームの設定が以下のフォーマットで標準入力に渡される。
 
 <pre>
-T P N
-A<sub>0</sub> A<sub>1</sub> A<sub>2</sub> ... A<sub>5</sub>
+T D L
+M<sub>0</sub> M<sub>1</sub> M<sub>2</sub> ... M<sub>5</sub>
 </pre>
 
 * T: 全ターン数。
-* P: プレイヤー数。
-* N: プログラミング言語の数。
-* A<sub>n</sub>: プログラミング言語nの注目度。
+* D: 大名の数。
+* L: 領主の数。
+* M<sub>i</sub>: 領主iの兵力。
 
 ### ターン情報の入力形式
 
 各ターンの初めに、現在の情報が以下のフォーマットで標準入力に渡される。
 
 <pre>
-T D
-B<sub>00</sub>　B<sub>01</sub> B<sub>02</sub> B<sub>03</sub>
-B<sub>10</sub>　B<sub>11</sub> B<sub>12</sub> B<sub>13</sub>
-B<sub>20</sub>　B<sub>21</sub> B<sub>22</sub> B<sub>23</sub>
+T P
+I<sub>00</sub>　I<sub>01</sub> I<sub>02</sub> I<sub>03</sub>
+I<sub>10</sub>　I<sub>11</sub> I<sub>12</sub> I<sub>13</sub>
+I<sub>20</sub>　I<sub>21</sub> I<sub>22</sub> I<sub>23</sub>
 :
 :
-B<sub>50</sub>　B<sub>51</sub> B<sub>52</sub> B<sub>53</sub>
+I<sub>50</sub>　I<sub>51</sub> I<sub>52</sub> I<sub>53</sub>
 R<sub>0</sub> R<sub>1</sub> R<sub>2</sub> ... R<sub>5</sub>
-P<sub>0</sub> P<sub>1</sub> P<sub>2</sub> ... P<sub>5</sub>
+N<sub>0</sub> N<sub>1</sub> N<sub>2</sub> ... N<sub>5</sub>
 </pre>
 
 * T: 現在のターン数。1から始まる。
-* D: 平日の場合は"W", 休日の場合は"H"。
-* B<sub>nm</sub>: プログラミング言語nに対するプレイヤーmの公開されている（つまり平日の情報のみでわかる）信者数。このAIプレイヤー自身はプレイヤー0である。6ターン目以降は、5ターン目以前の休日の布教ぶんも含めた信者数となる。
-* R<sub>n</sub>: プログラミング言語nに対するこのAIプレイヤーの真の（つまり休日も合わせた）信者数。
-* P<sub>n</sub>: プログラミング言語nが前日の休日に布教をされた回数。
+* P: 昼ターンの場合は"D", 夜ターンの場合は"N"。
+* I<sub>ij</sub>: 領主iから大名jへの公開されている（つまり昼ターンの情報のみでわかる）親密度。このAIプレイヤ自身は大名0である。
+* R<sub>i</sub>: 領主iからこのAIプレイヤへの真の（つまり夜ターンも合わせた）親密度。
+* N<sub>i</sub>: 領主iが直前の夜ターンに交渉された回数。
 
-P<sub>0</sub> P<sub>1</sub> P<sub>2</sub> ... P<sub>5</sub>の行は、平日のターンでのみ含まれる。
+N<sub>0</sub> N<sub>1</sub> N<sub>2</sub> ... N<sub>5</sub>の行は、昼ターンでのみ含まれる。
 
 ### 行動の出力形式
 
-そのターンでの布教言語は、以下のフォーマットで標準出力に出力する。
+そのターンでの交渉相手は、以下のフォーマットで標準出力に出力する。
 
-* __平日の場合__
+* __昼ターンの場合__
 
   <pre>
-  L<sub>0</sub> L<sub>1</sub> L<sub>2</sub> L<sub>3</sub> H<sub>L</sub>
+  L<sub>0</sub> L<sub>1</sub> L<sub>2</sub> L<sub>3</sub> L<sub>4</sub>
   </pre>
   
-* __休日の場合__
+* __夜ターンの場合__
 
   <pre>
   L<sub>0</sub> L<sub>1</sub>
   </pre>
 
-L<sub>n</sub>: 布教するプログラミング言語の番号（0から5で指定）。L<sub>0</sub>からL<sub>4</sub>の順番は関係しない。
+L<sub>i</sub>: 交渉相手の領主の番号（0から5で指定）。L<sub>0</sub>からL<sub>4</sub>の順番は関係しない。
 
 一度行動を出力すると、そのAIのターンは終了となる。
 なお、ターン開始から1秒以内に出力がなければ、AIプログラムが強制的に停止される。
 
+### 出力時の注意
+
+ゲーム開始時の`READY`やターンの行動を出力する際、最後に改行文字（`"\n"`）を付けること。
+また、出力後は標準出力をflushすること。
+
 <a name="PseudoCode"></a>
 
-## ルールの疑似コード
+## 擬似コード
 
-    programming_language = (attention, revealed_believers[4], real_believers[4])
+    lord = (military_strength, revealed_intimacy[4], real_intimacy[4])
 
     main:
         init
@@ -162,41 +138,40 @@ L<sub>n</sub>: 布教するプログラミング言語の番号（0から5で指
         finish
 
     init:
-        players = player[4]
-        languages = programming_language[6] (rand(3, 6), [0, 0, 0, 0], [0, 0, 0, 0])
+        daimyos = daimyo[4]
+        lords = lord[6] (rand(3, 6), [0, 0, 0, 0], [0, 0, 0, 0])
         turn = 1
 
     process_turn:
-        for l in languages:
-            display_to_all_players(l.attention)
-            display_to_all_players(l.revealed_believers)
-            if not is_holiday:
-                display_to_all_players(l.propagated)
-            l.propagated = 0
+        for l in lords:
+            display_to_all_daimyo(l.military_strength)
+            display_to_all_daimyo(l.revealed_intimacy)
+            if is_daytime:
+                display_to_all_daimyo(l.negotiation_count)
+            l.negotiation_count = 0
 
-        for p in players:
-            for i in [1 .. (is_holiday ? 2 : 5)]:
-                target = languages[p.selected[i]]
-                target.revealed_believers[p] += (is_holiday ? 0 : 1)
-                target.real_believers[p] += 1
-                target.propagated += 1
+        for d in daimyos:
+            for i in [1 .. (is_daytime ? 5 : 2)]:
+                target = lords[d.selected[i]]
+                target.revealed_intimacy[d] += (is_daytime ? 1 : 0)
+                target.real_intimacy[d] += (is_daytime ? 1 : 2)
+                target.negotiation_count += 1
 
         if turn == 5:
-            for h in heroines:
-                h.revealed_believers = h.real_believers
+            for l in lords:
+                l.revealed_intimacy = l.real_intimacy
 
-    is_holiday:
-        turn % 2 == 0
+    is_daytime:
+        turn % 2 == 1
 
     finish:
-        for l in languages:
-            best_players = players.max_by(p -> l.real_believers[p])
-            for p in best_players:
-                p.victory_points += h.attention / best_players.size
+        for l in lords:
+            best_daimyos = daimyos.max_by(d -> l.real_intimacy[d])
+            for d in best_daimyos:
+                d.total_military_strength += l.military_strength / best_daimyos.size
 
-            worst_players = players.min_by(p -> l.real_believers[p])
-            for p in worst_players:
-                p.victory_points -= h.attention / worst_players.size
+            worst_daimyos = daimyos.min_by(d -> l.real_intimacy[d])
+            for d in worst_daimyos:
+                d.total_military_strength -= l.military_strength / worst_daimyos.size
 
-        winners = players.max_by(p -> p.victory_points)
-        draw if winners.size > 1
+        winners = daimyos.max_by(d -> d.total_military_strength)

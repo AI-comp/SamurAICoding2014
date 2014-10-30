@@ -1,154 +1,133 @@
-# Lang Wars 2 - AI Challenge @ CODE FESTIVAL 2014
+# Negotiate and Conquer: SamurAI Coding 2014 Game Rule
 
-## Overview of Game
+## Outline
 
-You are a programmer.
-Let's propagandize programming languages and increase the number of believers of the programming languages.
-Overreach rivals and become the pontiff of programming languages!
+You are a daimyo (a feudal lord) of the Civil War Era.
+Negotiate with noncommittal feudal lords to ally themselves with you and win a victory.
 
-## Pseudo Code of Game Rule
+## Game Objective
 
-If you want to read the game rule in a programming language, please see [pseudo code](#PseudoCode).
+_Noncommittal lords_ have their own military force.
+Each _daimyo_ tries to become _intimate_ with such lords through _negotiation_.
+_The total military strength_ of a daimyo is the sum of the _force strengths_ of lords with whom he is the most intimate subtracted by the sum of those with whom he is the least intimate.
+The daimyo with the largest total military strength wins the game.
 
-## Goal of Game
+## Game Process
 
-Get more _victory points_, which are calculated with the number of believers of each programming language, than other players.
+Game manager [pseudo code](#PseudoCode) is provided below.
 
-## Flow of Game
+### Initial Setting
 
-There are four players and six programming languages.
+There are 4 daimyo and 6 noncommittal lords.
+Each player controls one daimyo.
+The military force of each of the noncommittal lord is set randomly among  3, 4, 5, or 6, and made open.
 
-Lang Wars is a turn-based game. Players _propagandize_ their favorite programming languages and gather believers.
-Because players' actions are partially hidden, it is important to bargain with each other.
+### Game Turns and Negotiations
 
-Games end in 9 turns, then players gain victory points corresponding to the number of believers of programming languages.
-The player who gathered the most number of the believers of a programming language gets the victory points of the language, in contrast, the player who gathered the least number of the believers of a programming language loses the victory points of the language.
-Thus, players should propagate their favorite programming languages and gather more believers than the other players, and also, propagate the other programming languages to prevent losing victory points.
-The player who gains the most victory points will win!
+One game consists of 9 turns: alternatingly held 5 _daytime turns_ and 4 _nighttime turns_.
+The first turn is a daytime turn.
 
-## Game Start
+On each turn, each of the daimyo chooses one or more noncommittal lords to have negotiation with.
+Five times of negotiation are made on daytime turns, and two times on nighttime turns.
+A daimyo can have negotiation with the same lord for more than once on a single turn.
+The intimacy degree of a lord with a daimyo is the sum of the number of times the daimyo had negotiation with the lord on daytime turns and twice the number of times of such negotiation on nighttime turns.
 
-The game system sets random _attention degree_ (from 3 to 6) to every programming language, and reveals them to players at the beginning.
-A language with higher attention degree has more victory points. Players who gathered the most/least number of believers of this language will gain/lose victory points.
+After each of the daytime turns, all the information are made open: which daimyo had negotiation with which lord and how many times.
+After each of the nighttime turns, the number of times each of the lords had negotiation is made open, but which of the daimyo had negotiation is kept secret.
 
-## Flow of Turn
+### Mid-Game Release of Secret Information
 
-There are two types of turns, workday turns and holiday turns.
-The first turn is workday. Workday and holiday turns will alternately appear.
-In other words, two turns make one week. Odd turns are workday and even turns are holiday.
-Players simultaneously select programming languages to propagate.
-They select languages to propagate five times in a workday turn, and twice in a holiday turn.
-You get one believer for one propagation in weekday, and two believers in holiday.
-Players can freely choose which programming languages to propagate.
-For example, players can choose five programming languages to propagate each one time, or propagate the same programming language five times in a workday turn.
-In addition, players who propagate the same programming language with others, will not influence others to gather believers.
+After the fifth turn (the third daytime turn), the so-far-concealed information on which daimyo had negotation with which lords on two preceding nighttime turns are made open.
 
-The number of the believers of each programming language will be calculated after all players select propagating languages.
-If the turn is workday, which player propagates which programming language is revealed.
-If the turn is holiday, only how many times each programming language is propagated is revealed.
+## Game Result
 
-The following table indicates the propagation feature in a workday turn and a holiday turn.
+The total military strength of a daimyo is, after the ninth turn, the sum of the force strengths of lords with whom he is the highest intimacy degree minus the sum of those with whom he is the lowest intimacy degree.
+The daimyo with the largest total military strength wins the game.
 
-|                                                 | Workday | Holiday |
-| ----------------------------------------------- | ------- | ------- |
-| Propagation times                               | 5       | 2       |
-| Number of believers gathered per propagation    | 1       | 2       |
-| Revelation of propagation information           | ALL     | For each programming language, the number of propagation times|
+When there are more than one daimyo with the highest or the lowest intimacy degree with a lord, the military strength of the lord divided by the number of such daimyo is added to or subtracted from the military strengths of the relevant daimyo.
 
-If it is the fifth turn of the game, everyone will be notified how many believers each player gathered for each programming language so far, even in holidays.
+## Input and Output Format of an AI Program
 
-## End of Game
+Your AI program is executed at the start of the game.
+When it becomes ready to start a game, print `READY` to the standard output, and then read the settings of the game.
+Then read current information each turn and outputs lords to negotiate with in that turn.
 
-After 9 turns, the game ends and victory points are calculated.
+The thinking time of an AI program is limited.
+If an AI program exceeds the limit, it will be terminated and its all actions will be regarded as "negotiate with the 0th lord" in the rest of the game.
 
-The player who gathered the most/least number of the believers of a programming language gains/loses the attention degree of the language as victory points.
-When multiple players gathered the most/least number of the believers, they gain/lose the attention degree divided by the number of the players. Floating-point divisions are used in calculating victory points.
+### Output Format of a Ready Message
 
-After victory points of all the programming languages are calculated, the player who gained the most victory points wins.
-When there are multiple players gained the most victory points, the game ends in a draw.
-
-## Input Format of AI Programs
-
-AI programs are executed at the start of the game.
-AI programs should print `READY` and the newline character ("\n") to the standard output, and then read the settings of game.
-Be sure to flush the standard output after printing.
-Then, AI programs read current propagation information of each turn, and print the selected languages.
-
-The thinking time of AI is limited.
-If an AI program exceeds the limited thinking time, it will be terminated by force and its behavior will be regarded as "select language 0 always" until the end.
-
-### Output Format of Ready Message
-
-When the AI programs prepared for the game, they must print `READY` and the newline character ("\n") to the standard output.
-Be sure to flush the standard output after printing.
-Note that, the ready message must be printed within 5 seconds from game start, otherwise the AI program will be terminated by force.
+When your AI is ready to start a game, print `READY` to the standard output.
+If a ready message is not printed within 5 seconds, the AI program will be terminated.
 
 ### Input Format of Game Settings
 
-When the game starts (before the 1st turn), the game system sends settings to every AI program through the standard input.
-The format of settings is listed as following:
+When the game starts, namely at the beginning of the first turn, game settings are sent through the standard input with the following format:
 
 <pre>
-T P N
-A<sub>0</sub> A<sub>1</sub> A<sub>2</sub> ... A<sub>5</sub>
+T D L
+M<sub>0</sub> M<sub>1</sub> M<sub>2</sub> ... M<sub>5</sub>
 </pre>
 
-* T: The number of all turns (always 9).
-* P: The number of players (always 4).
-* N: The number of programming language (always 6).
-* A<sub>i</sub>: The attention degree of language i.
+* T: The number of turns.
+* D: The number of daimyo.
+* L: The number of lords.
+* M<sub>i</sub>: The military strength of the i-th lord.
 
 ### Input Format of Turn Information
 
 At the beginning of each turn, current information is sent through the standard input with the following format:
 
 <pre>
-T D
-B<sub>00</sub>　B<sub>01</sub> B<sub>02</sub> B<sub>03</sub>
-B<sub>10</sub>　B<sub>11</sub> B<sub>12</sub> B<sub>13</sub>
-B<sub>20</sub>　B<sub>21</sub> B<sub>22</sub> B<sub>23</sub>
+T P
+I<sub>00</sub>　I<sub>01</sub> I<sub>02</sub> I<sub>03</sub>
+I<sub>10</sub>　I<sub>11</sub> I<sub>12</sub> I<sub>13</sub>
+I<sub>20</sub>　I<sub>21</sub> I<sub>22</sub> I<sub>23</sub>
 :
 :
-B<sub>50</sub>　B<sub>51</sub> B<sub>52</sub> B<sub>53</sub>
+I<sub>50</sub>　I<sub>51</sub> I<sub>52</sub> I<sub>53</sub>
 R<sub>0</sub> R<sub>1</sub> R<sub>2</sub> ... R<sub>5</sub>
-P<sub>0</sub> P<sub>1</sub> P<sub>2</sub> ... P<sub>5</sub>
+N<sub>0</sub> N<sub>1</sub> N<sub>2</sub> ... N<sub>5</sub>
 </pre>
 
-* T: Current turn. (starts from 1)
-* D: "W" stand for workday turn, "H" stand for holiday turn.
-* B<sub>ij</sub>: The visible number (only counting the believers gathered in workday turn) of believers of programming language i gathered by player j. The player 0 is your AI program. In the sixth turn and later turns, the number includes believers gathered in holidays before fifth turn.
-* R<sub>i</sub>: Your real number of believers of programming language i (counting the believers gathered in both workday and holiday turns).
-* P<sub>i</sub>: The number of times the programming language i was propagated in the previous holiday turn.
+* T: Current turn. Starts from 1.
+* P: "D" in a daytime turn, "N" in a nighttime turn.
+* I<sub>ij</sub>: The visible intimacy degree (only counting one increased in daytime turns) of the i-th lord to the j-th daimyo. Your AI player is the 0th daimyo. In the sixth turn and later turns, this number includes intimacy degree increased in nighttime turns before the fifth turn.
+* R<sub>i</sub>: The real intimacy degree (counting one increased in both daytime turns and nighttime turns) of the i-th lord to your AI player.
+* N<sub>i</sub>: The number of times the i-th lords has been negotiated in the previous nighttime turn. 
 
-The last line (P<sub>0</sub> P<sub>1</sub> P<sub>2</sub> ... P<sub>5</sub>) is only revealed in workday turns.
+The last line R<sub>0</sub> R<sub>1</sub> R<sub>2</sub> ... R<sub>5</sub> appears only in daytime turns.
 
-### Output format of Actions
+### Output Format of Actions
 
-Print the language to propagate to the standard output with the following format:
+Print lords to negotiate with in that turn to the standard output with the following format:
 
-* __Workday Turn__
+* __Daytime Turn__
 
   <pre>
   L<sub>0</sub> L<sub>1</sub> L<sub>2</sub> L<sub>3</sub> L<sub>4</sub>
   </pre>
   
-* __Holiday Turn__
+* __Nighttime Turn__
 
   <pre>
   L<sub>0</sub> L<sub>1</sub>
   </pre>
 
-L<sub>i</sub>: The number of programming language to propagate (from 0 to 5). The order of L<sub>0</sub> to L<sub>4</sub> is not concerned.
+L<sub>i</sub>: The index of a lord to negotiate with (from 0 to 5). The order of L<sub>0</sub> to L<sub>4</sub> does not matter.
 
-Please terminate the output with the newline character ("\n"), and be sure to flush the standard output after printing.
-Once an AI program prints its action, its turn finishes.
-Note that, if an AI program does not print its action within 1 second from the beginning of a turn, it will be terminated by force.
+Once your AI program prints its actions, its turn finishes.
+If your AI program does not print its action within 1 second from the beginning of the turn, it will be terminated.
+
+### Notice
+
+When you output `READY` at the start of the game or actions in each turn, be sure to output a newline character (`"\n"`) at the end of the line and flush the standard output after printing.
 
 <a name="PseudoCode"></a>
 
-## Pseudo Code of Game Rule
+## Pseudo Code
 
-    programming_language = (attention, revealed_believers[4], real_believers[4])
+    lord = (military_strength, revealed_intimacy[4], real_intimacy[4])
 
     main:
         init
@@ -158,41 +137,40 @@ Note that, if an AI program does not print its action within 1 second from the b
         finish
 
     init:
-        players = player[4]
-        languages = programming_language[6] (rand(3, 6), [0, 0, 0, 0], [0, 0, 0, 0])
+        daimyos = daimyo[4]
+        lords = lord[6] (rand(3, 6), [0, 0, 0, 0], [0, 0, 0, 0])
         turn = 1
 
     process_turn:
-        for l in languages:
-            display_to_all_players(l.attention)
-            display_to_all_players(l.revealed_believers)
-            if not is_holiday:
-                display_to_all_players(l.propagated)
-            l.propagated = 0
+        for l in lords:
+            display_to_all_daimyo(l.military_strength)
+            display_to_all_daimyo(l.revealed_intimacy)
+            if is_daytime:
+                display_to_all_daimyo(l.negotiation_count)
+            l.negotiation_count = 0
 
-        for p in players:
-            for i in [1 .. (is_holiday ? 2 : 5)]:
-                target = languages[p.selected[i]]
-                target.revealed_believers[p] += (is_holiday ? 0 : 1)
-                target.real_believers[p] += 1
-                target.propagated += 1
+        for d in daimyos:
+            for i in [1 .. (is_daytime ? 5 : 2)]:
+                target = lords[d.selected[i]]
+                target.revealed_intimacy[d] += (is_daytime ? 1 : 0)
+                target.real_intimacy[d] += (is_daytime ? 1 : 2)
+                target.negotiation_count += 1
 
         if turn == 5:
-            for h in heroines:
-                h.revealed_believers = h.real_believers
+            for l in lords:
+                l.revealed_intimacy = l.real_intimacy
 
-    is_holiday:
-        turn % 2 == 0
+    is_daytime:
+        turn % 2 == 1
 
     finish:
-        for l in languages:
-            best_players = players.max_by(p -> l.real_believers[p])
-            for p in best_players:
-                p.victory_points += h.attention / best_players.size
+        for l in lords:
+            best_daimyos = daimyos.max_by(d -> l.real_intimacy[d])
+            for d in best_daimyos:
+                d.total_military_strength += l.military_strength / best_daimyos.size
 
-            worst_players = players.min_by(p -> l.real_believers[p])
-            for p in worst_players:
-                p.victory_points -= h.attention / worst_players.size
+            worst_daimyos = daimyos.min_by(d -> l.real_intimacy[d])
+            for d in worst_daimyos:
+                d.total_military_strength -= l.military_strength / worst_daimyos.size
 
-        winners = players.max_by(p -> p.victory_points)
-        draw if winners.size > 1
+        winners = daimyos.max_by(d -> d.total_military_strength)
