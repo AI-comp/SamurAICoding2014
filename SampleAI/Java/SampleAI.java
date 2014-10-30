@@ -3,26 +3,18 @@ import java.util.*;
 
 public class SampleAI {
 	private static Random random;
-	private static int maxTurn, turn, playersNum, heroinesNum;
+	private static int maxTurn, turn, playersNum, languagesNum;
 	private static char day;
-	private static Heroine[] heroines;
-	private static final Scanner scanner = new Scanner(System.in);
-	private static final PrintWriter writer = new PrintWriter(System.out, true);
+	private static Language[] languages;
+	private static Scanner scanner;
+	private static PrintWriter writer;
 
 	public static void main(String[] args) {
-		if (args.length > 0) {
-			try {
-				Long seed = Long.parseLong(args[0]);
-				writer.println("SEED: " + seed);
-				random = new Random(seed);
-			} catch (Exception e) {
-			}
-		}
-		if (random == null) {
-			random = new Random();
-		}
-
+		random = new Random();
+		scanner = new Scanner(System.in);
+		writer = new PrintWriter(System.out, true);
 		writer.println("READY");
+		writer.flush();
 		readInitialData();
 		for (int t = 0; t < maxTurn; t++) {
 			readData();
@@ -35,32 +27,32 @@ public class SampleAI {
 	private static void readInitialData() {
 		maxTurn = scanner.nextInt();
 		playersNum = scanner.nextInt();
-		heroinesNum = scanner.nextInt();
-		heroines = new Heroine[heroinesNum];
-		for (int i = 0; i < heroinesNum; i++) {
-			int enthusiasm = scanner.nextInt();
-			heroines[i] = new Heroine(enthusiasm);
+		languagesNum = scanner.nextInt();
+		languages = new Language[languagesNum];
+		for (int i = 0; i < languagesNum; i++) {
+			int attention = scanner.nextInt();
+			languages[i] = new Language(attention);
 		}
 	}
 
 	private static void readData() {
 		turn = scanner.nextInt();
 		day = scanner.next().charAt(0);
-		for (int i = 0; i < heroinesNum; i++) {
+		for (int i = 0; i < languagesNum; i++) {
 			int[] revealedScore = new int[playersNum];
 			for (int j = 0; j < playersNum; j++) {
 				revealedScore[j] = scanner.nextInt();
 			}
-			heroines[i].revealedScore = revealedScore;
+			languages[i].revealedScore = revealedScore;
 		}
-		for (int i = 0; i < heroinesNum; i++) {
+		for (int i = 0; i < languagesNum; i++) {
 			int realScore = scanner.nextInt();
-			heroines[i].realScore = realScore;
+			languages[i].realScore = realScore;
 		}
 		if (day == 'W') {
-			for (int i = 0; i < heroinesNum; i++) {
-				int datedTimes = scanner.nextInt();
-				heroines[i].datedTimes = datedTimes;
+			for (int i = 0; i < languagesNum; i++) {
+				int selectedTimes = scanner.nextInt();
+				languages[i].selectedTimes = selectedTimes;
 			}
 		}
 	}
@@ -68,20 +60,21 @@ public class SampleAI {
 	private static void writeCommand() {
 		StringBuilder command = new StringBuilder();
 		for (int i = 0; i < (day == 'W' ? 5 : 2); i++) {
-			int c = random.nextInt(heroinesNum);
+			int c = random.nextInt(languagesNum);
 			command.append(c);
 			if (i < 4) {
 				command.append(" ");
 			}
 		}
 		writer.println(command.toString());
+		writer.flush();
 	}
 }
 
-class Heroine {
-	int enthusiasm, revealedScore[], realScore, datedTimes;
+class Language {
+	int attention, revealedScore[], realScore, selectedTimes;
 
-	Heroine(int enthusiasm) {
-		this.enthusiasm = enthusiasm;
+	Language(int attention) {
+		this.attention = attention;
 	}
 }

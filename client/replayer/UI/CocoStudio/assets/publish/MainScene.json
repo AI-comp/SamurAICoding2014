@@ -49,7 +49,7 @@
       "scalex": 1,
       "scaley": 1,
       "visible": 1,
-      "x": 200,
+      "x": 266,
       "y": 384,
       "zorder": 2,
       "gameobjects": [],
@@ -77,7 +77,7 @@
       "scalex": 1,
       "scaley": 1,
       "visible": 1,
-      "x": 400,
+      "x": 532,
       "y": 384,
       "zorder": 2,
       "gameobjects": [],
@@ -105,8 +105,8 @@
       "scalex": 1,
       "scaley": 1,
       "visible": 1,
-      "x": 600,
-      "y": 384,
+      "x": 0,
+      "y": 0,
       "zorder": 2,
       "gameobjects": [],
       "components": [
@@ -133,7 +133,7 @@
       "scalex": 1,
       "scaley": 1,
       "visible": 1,
-      "x": 0,
+      "x": 266,
       "y": 0,
       "zorder": 2,
       "gameobjects": [],
@@ -161,63 +161,7 @@
       "scalex": 1,
       "scaley": 1,
       "visible": 1,
-      "x": 200,
-      "y": 0,
-      "zorder": 2,
-      "gameobjects": [],
-      "components": [
-        {
-          "__type": "ComGUIAdapterSurrogate:#EditorCommon.JsonModel.Component",
-          "classname": "GUIComponent",
-          "name": "GUIComponent",
-          "file": null,
-          "fileData": {
-            "path": "publish/HeroinePanel.json",
-            "plistFile": "",
-            "resourceType": 0
-          }
-        }
-      ]
-    },
-    {
-      "__type": "ComGameObjectSurrogate:#EditorCommon.JsonModel",
-      "classname": "CCNode",
-      "name": "HeroinePanel6",
-      "canedit": true,
-      "objecttag": 6,
-      "rotation": 0,
-      "scalex": 1,
-      "scaley": 1,
-      "visible": 1,
-      "x": 400,
-      "y": 0,
-      "zorder": 2,
-      "gameobjects": [],
-      "components": [
-        {
-          "__type": "ComGUIAdapterSurrogate:#EditorCommon.JsonModel.Component",
-          "classname": "GUIComponent",
-          "name": "GUIComponent",
-          "file": null,
-          "fileData": {
-            "path": "publish/HeroinePanel.json",
-            "plistFile": "",
-            "resourceType": 0
-          }
-        }
-      ]
-    },
-    {
-      "__type": "ComGameObjectSurrogate:#EditorCommon.JsonModel",
-      "classname": "CCNode",
-      "name": "HeroinePanel7",
-      "canedit": true,
-      "objecttag": 7,
-      "rotation": 0,
-      "scalex": 1,
-      "scaley": 1,
-      "visible": 1,
-      "x": 600,
+      "x": 532,
       "y": 0,
       "zorder": 2,
       "gameobjects": [],

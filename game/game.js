@@ -7,7 +7,7 @@
         function Game(seed) {
             this.heroines = [];
             this.initialTurn = 1;
-            this.lastTurn = 10;
+            this.lastTurn = 9;
             this.turn = this.initialTurn;
             this.mt = new MersenneTwister(seed);
             this.replay = {
@@ -18,7 +18,7 @@
 
         Game.prototype.initialize = function (numPlayers, numHeroines) {
             this.numPlayers = numPlayers || 4;
-            this.populateHeroines(numHeroines || this.numPlayers * 2);
+            this.populateHeroines(numHeroines || this.numPlayers * 1.5);
         };
 
         Game.prototype.populateHeroines = function (numHeroines) {
@@ -69,6 +69,12 @@
                 }, this);
             }, this);
 
+            if (this.turn == 5) {
+                _.each(this.heroines, function (heroine) {
+                    heroine.revealedLove = heroine.realLove.slice(0);
+                }, this);
+            }
+
             this.turn += 1;
         };
 
@@ -112,7 +118,7 @@
 
             if (this.isWeekday()) {
                 lines.push(_.map(this.heroines, function (heroine) {
-                    return heroine.getDatedCount();
+                    return heroine.datedCount;
                 }).join(' '));
             }
 
@@ -135,7 +141,7 @@
             if (this.isWeekday()) {
                 lines.push('Propagated:');
                 lines.push(_.map(this.heroines, function (heroine) {
-                    return heroine.getDatedCount();
+                    return heroine.datedCount;
                 }).join(' '));
             }
 
@@ -246,7 +252,7 @@
                 this.revealedLove.push(0);
                 this.realLove.push(0);
             }
-            this.dated = 0;
+            this.datedCount = 0;
         }
 
         Heroine.prototype.date = function (playerIndex, isWeekday) {
@@ -254,7 +260,7 @@
             if (isWeekday) {
                 this.revealedLove[playerIndex] += 1;
             }
-            this.dated += 1;
+            this.datedCount += 1;
         };
 
         Heroine.prototype.filterPlayersByLove = function (players, func, real) {
@@ -270,11 +276,7 @@
         };
 
         Heroine.prototype.refresh = function () {
-            this.dated = 0;
-        };
-
-        Heroine.prototype.getDatedCount = function () {
-            return this.dated;
+            this.datedCount = 0;
         };
 
         return Heroine;

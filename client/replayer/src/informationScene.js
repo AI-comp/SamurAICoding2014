@@ -67,8 +67,7 @@ var InformationScene = ReplayerScene.extend({
             _(this.game.getNumHeroines()).times(function (heroineIndex) {
                 var heroine = this.game.heroines[heroineIndex];
                 var heroinePanel = this.getHeroinePanel(heroineIndex);
-                var datedCount = heroine.getDatedCount();
-                heroinePanel.getChildByName('DatedImage').loadTexture(res.image.info.datedCounts[datedCount]);
+                heroinePanel.getChildByName('DatedImage').loadTexture(res.image.info.datedCounts[heroine.datedCount]);
             }, this);
         }
     },

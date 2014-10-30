@@ -4,7 +4,7 @@ var runGame = function () {
     ReplayerScene.prototype.commands = replay.commands;
 
     var mtForSeed = new MersenneTwister(replay.seed);
-	var mt = new MersenneTwister(mtForSeed.genrand_int32());
+    var mt = new MersenneTwister(mtForSeed.genrand_int32());
 
     ReplayerScene.prototype.heroineIds = [];
     var numHeroines = game.getNumHeroines();

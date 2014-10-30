@@ -1,4 +1,4 @@
-# Lang Wars - JavaChallenge 2014
+# Lang Wars 2 - AI Challenge @ CODE FESTIVAL 2014
 
 ## Overview of Game
 
@@ -16,12 +16,12 @@ Get more _victory points_, which are calculated with the number of believers of 
 
 ## Flow of Game
 
-There are four players and eight programming languages.
+There are four players and six programming languages.
 
 Lang Wars is a turn-based game. Players _propagandize_ their favorite programming languages and gather believers.
 Because players' actions are partially hidden, it is important to bargain with each other.
 
-Games end in 10 turns, then players gain victory points corresponding to the number of believers of programming languages.
+Games end in 9 turns, then players gain victory points corresponding to the number of believers of programming languages.
 The player who gathered the most number of the believers of a programming language gets the victory points of the language, in contrast, the player who gathered the least number of the believers of a programming language loses the victory points of the language.
 Thus, players should propagate their favorite programming languages and gather more believers than the other players, and also, propagate the other programming languages to prevent losing victory points.
 The player who gains the most victory points will win!
@@ -37,8 +37,8 @@ There are two types of turns, workday turns and holiday turns.
 The first turn is workday. Workday and holiday turns will alternately appear.
 In other words, two turns make one week. Odd turns are workday and even turns are holiday.
 Players simultaneously select programming languages to propagate.
-They select languages to propagate five times in a workday turn, and two times in a holiday turn.
-Players select a programming language to propagate one time, will gather one believer of that language.
+They select languages to propagate five times in a workday turn, and twice in a holiday turn.
+You get one believer for one propagation in weekday, and two believers in holiday.
 Players can freely choose which programming languages to propagate.
 For example, players can choose five programming languages to propagate each one time, or propagate the same programming language five times in a workday turn.
 In addition, players who propagate the same programming language with others, will not influence others to gather believers.
@@ -52,12 +52,14 @@ The following table indicates the propagation feature in a workday turn and a ho
 |                                                 | Workday | Holiday |
 | ----------------------------------------------- | ------- | ------- |
 | Propagation times                               | 5       | 2       |
-| Number of believers gathered per propagation    | 1       | 1       |
+| Number of believers gathered per propagation    | 1       | 2       |
 | Revelation of propagation information           | ALL     | For each programming language, the number of propagation times|
+
+If it is the fifth turn of the game, everyone will be notified how many believers each player gathered for each programming language so far, even in holidays.
 
 ## End of Game
 
-After 10 turns, the game ends and victory points are calculated.
+After 9 turns, the game ends and victory points are calculated.
 
 The player who gathered the most/least number of the believers of a programming language gains/loses the attention degree of the language as victory points.
 When multiple players gathered the most/least number of the believers, they gain/lose the attention degree divided by the number of the players. Floating-point divisions are used in calculating victory points.
@@ -88,12 +90,12 @@ The format of settings is listed as following:
 
 <pre>
 T P N
-A<sub>0</sub> A<sub>1</sub> A<sub>2</sub> ... A<sub>7</sub>
+A<sub>0</sub> A<sub>1</sub> A<sub>2</sub> ... A<sub>5</sub>
 </pre>
 
-* T: The number of all turns (always 10).
+* T: The number of all turns (always 9).
 * P: The number of players (always 4).
-* N: The number of programming language (always 8).
+* N: The number of programming language (always 6).
 * A<sub>i</sub>: The attention degree of language i.
 
 ### Input Format of Turn Information
@@ -107,18 +109,18 @@ B<sub>10</sub>　B<sub>11</sub> B<sub>12</sub> B<sub>13</sub>
 B<sub>20</sub>　B<sub>21</sub> B<sub>22</sub> B<sub>23</sub>
 :
 :
-B<sub>70</sub>　B<sub>71</sub> B<sub>72</sub> B<sub>73</sub>
-R<sub>0</sub> R<sub>1</sub> R<sub>2</sub> ... R<sub>7</sub>
-P<sub>0</sub> P<sub>1</sub> P<sub>2</sub> ... P<sub>7</sub>
+B<sub>50</sub>　B<sub>51</sub> B<sub>52</sub> B<sub>53</sub>
+R<sub>0</sub> R<sub>1</sub> R<sub>2</sub> ... R<sub>5</sub>
+P<sub>0</sub> P<sub>1</sub> P<sub>2</sub> ... P<sub>5</sub>
 </pre>
 
 * T: Current turn. (starts from 1)
 * D: "W" stand for workday turn, "H" stand for holiday turn.
-* B<sub>ij</sub>: The visible number (only counting the believers gathered in workday turn) of believers of programming language i gathered by player j. The player 0 is your AI program.
+* B<sub>ij</sub>: The visible number (only counting the believers gathered in workday turn) of believers of programming language i gathered by player j. The player 0 is your AI program. In the sixth turn and later turns, the number includes believers gathered in holidays before fifth turn.
 * R<sub>i</sub>: Your real number of believers of programming language i (counting the believers gathered in both workday and holiday turns).
 * P<sub>i</sub>: The number of times the programming language i was propagated in the previous holiday turn.
 
-The last line (P<sub>0</sub> P<sub>1</sub> P<sub>2</sub> ... P<sub>7</sub>) is only revealed in workday turns.
+The last line (P<sub>0</sub> P<sub>1</sub> P<sub>2</sub> ... P<sub>5</sub>) is only revealed in workday turns.
 
 ### Output format of Actions
 
@@ -136,7 +138,7 @@ Print the language to propagate to the standard output with the following format
   L<sub>0</sub> L<sub>1</sub>
   </pre>
 
-L<sub>i</sub>: The number of programming language to propagate (from 0 to 7). The order of L<sub>0</sub> to L<sub>4</sub> is not concerned.
+L<sub>i</sub>: The number of programming language to propagate (from 0 to 5). The order of L<sub>0</sub> to L<sub>4</sub> is not concerned.
 
 Please terminate the output with the newline character ("\n"), and be sure to flush the standard output after printing.
 Once an AI program prints its action, its turn finishes.
@@ -150,14 +152,14 @@ Note that, if an AI program does not print its action within 1 second from the b
 
     main:
         init
-        while turn <= 10:
+        while turn <= 9:
             process_turn
             turn += 1
         finish
 
     init:
         players = player[4]
-        languages = programming_language[8] (rand(3, 6), [0, 0, 0, 0], [0, 0, 0, 0])
+        languages = programming_language[6] (rand(3, 6), [0, 0, 0, 0], [0, 0, 0, 0])
         turn = 1
 
     process_turn:
@@ -174,6 +176,10 @@ Note that, if an AI program does not print its action within 1 second from the b
                 target.revealed_believers[p] += (is_holiday ? 0 : 1)
                 target.real_believers[p] += 1
                 target.propagated += 1
+
+        if turn == 5:
+            for h in heroines:
+                h.revealed_believers = h.real_believers
 
     is_holiday:
         turn % 2 == 0

@@ -27,9 +27,9 @@ rl.on('line', function (line) {
 	} else {
 		if(lineCount == 1) {
 
-		} else if(2 <= lineCount && lineCount <= 9 ) {
+		} else if(2 <= lineCount && lineCount <= 7 ) {
 			var values = line.split(' ');
-		} else if(lineCount == 10) {
+		} else if(lineCount == 8) {
 			if(!isHoliday) {
 				var values = line.split(' ');
 			} else {
@@ -45,7 +45,7 @@ rl.on('line', function (line) {
 			turn++;
 		}
 	}
-	if(turn < 10) {
+	if(turn < T) {
 		rl.prompt();
 	} else {
 		rl.close();

@@ -1,8 +1,9 @@
-# Lang Wars - JavaChallenge 2014
+# Lang Wars 2 - AI Challenge @ CODE FESTIVAL 2014
 
 Web Sites
-- http://www.ai-comp.net/javachallenge2014/
-- http://icpc.iisf.or.jp/2014-waseda/
+
+- http://www.ai-comp.net/codefestival2014/
+- http://recruit-jinji.jp/code_fes2014/
 
 ## For Participants
 
