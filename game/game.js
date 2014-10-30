@@ -100,7 +100,7 @@
         Game.prototype.getTurnInformation = function (playerIndex) {
             var lines = [];
 
-            lines.push([this.turn, this.isWeekday() ? 'W' : 'H'].join(' '));
+            lines.push([this.turn, this.isWeekday() ? 'D' : 'N'].join(' '));
 
             _.each(this.heroines, function (heroine) {
                 var enemyIndices = _.reject(_.range(this.numPlayers), function (index) {
@@ -128,18 +128,18 @@
         Game.prototype.getStatus = function () {
             var lines = [];
 
-            lines.push('Attention:');
+            lines.push('Military Strength:');
             lines.push(_.map(this.heroines, function (heroine) {
                 return heroine.enthusiasm;
             }).join(' '));
 
-            lines.push('Real Believers:');
+            lines.push('Real Intimacy:');
             _.each(this.heroines, function (heroine) {
                 lines.push(heroine.realLove.join(' '));
             });
 
             if (this.isWeekday()) {
-                lines.push('Propagated:');
+                lines.push('Negotiation Count:');
                 lines.push(_.map(this.heroines, function (heroine) {
                     return heroine.datedCount;
                 }).join(' '));
@@ -147,7 +147,7 @@
 
             lines.push('Ranking:');
             _.each(this.getRanking(), function (player) {
-                lines.push('Player ' + player.index + ': ' + player.getPopularity() + ' victory points');
+                lines.push('Daimyo ' + player.index + ': ' + player.getPopularity() + ' total military strength');
             });
 
             return lines.join('\n') + '\n';

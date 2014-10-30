@@ -1,5 +1,5 @@
 {
-  "name": "Negotiate and Conquer",
+  "name": "NegotiateAndConquer",
   "version": "1.0.0",
   "description": "Simulation Game",
   "main": "server/main.js",

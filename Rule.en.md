@@ -9,7 +9,7 @@ Negotiate with noncommittal feudal lords to ally themselves with you and win a v
 
 _Noncommittal lords_ have their own military force.
 Each _daimyo_ tries to become _intimate_ with such lords through _negotiation_.
-_The total military strength_ of a daimyo is the sum of the _force strengths_ of lords with whom he is the most intimate subtracted by the sum of those with whom he is the least intimate.
+_The total military strength_ of a daimyo is the sum of the _military strengths_ of lords with whom he is the most intimate subtracted by the sum of those with whom he is the least intimate.
 The daimyo with the largest total military strength wins the game.
 
 ## Game Process
@@ -20,7 +20,7 @@ Game manager [pseudo code](#PseudoCode) is provided below.
 
 There are 4 daimyo and 6 noncommittal lords.
 Each player controls one daimyo.
-The military force of each of the noncommittal lord is set randomly among  3, 4, 5, or 6, and made open.
+The military strength of each of the noncommittal lord is set randomly among  3, 4, 5, or 6, and made open.
 
 ### Game Turns and Negotiations
 
@@ -41,7 +41,7 @@ After the fifth turn (the third daytime turn), the so-far-concealed information 
 
 ## Game Result
 
-The total military strength of a daimyo is, after the ninth turn, the sum of the force strengths of lords with whom he is the highest intimacy degree minus the sum of those with whom he is the lowest intimacy degree.
+The total military strength of a daimyo is, after the ninth turn, the sum of the military strengths of lords with whom he is the highest intimacy degree minus the sum of those with whom he is the lowest intimacy degree.
 The daimyo with the largest total military strength wins the game.
 
 When there are more than one daimyo with the highest or the lowest intimacy degree with a lord, the military strength of the lord divided by the number of such daimyo is added to or subtracted from the military strengths of the relevant daimyo.
