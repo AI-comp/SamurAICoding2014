@@ -7,10 +7,9 @@ Negotiate with noncommittal feudal lords to ally themselves with you and win a v
 
 ## Game Objective
 
-_Noncommittal lords_ have their own military force.
-Each _daimyo_ tries to become _intimate_ with such lords through _negotiation_.
-_The total military strength_ of a daimyo is the sum of the _military strengths_ of lords with whom he is the most intimate subtracted by the sum of those with whom he is the least intimate.
-The daimyo with the largest total military strength wins the game.
+The objective of the game is to acquire _military force_ by increasing the _intimacy degree_ of _noncommittal lords_ through _negotiation_ and to be the one with the largest _total military strength_ among all _daimyo_.
+Each daimyo gains military strength at the middle and the end of the game.
+At each moment, the total military strength of a daimyo is increased by the sum of the _force strengths_ of lords with whom he is the most intimate among all daimyo subtracted by the sum of those with whom he is the least intimate.
 
 ## Game Process
 
@@ -20,7 +19,7 @@ Game manager [pseudo code](#PseudoCode) is provided below.
 
 There are 4 daimyo and 6 noncommittal lords.
 Each player controls one daimyo.
-The military strength of each of the noncommittal lord is set randomly among  3, 4, 5, or 6, and made open.
+The military force of each of the noncommittal lord is set randomly among  3, 4, 5, or 6, and made open.
 
 ### Game Turns and Negotiations
 
@@ -35,16 +34,18 @@ The intimacy degree of a lord with a daimyo is the sum of the number of times th
 After each of the daytime turns, all the information are made open: which daimyo had negotiation with which lord and how many times.
 After each of the nighttime turns, the number of times each of the lords had negotiation is made open, but which of the daimyo had negotiation is kept secret.
 
-### Mid-Game Release of Secret Information
+At the end of the fifth turn (the third daytime turn), the so-far-concealed information on which daimyo had negotation with which lords on two preceding nighttime turns are made open.
 
-After the fifth turn (the third daytime turn), the so-far-concealed information on which daimyo had negotation with which lords on two preceding nighttime turns are made open.
+### Calculation of Total Military Strength
+
+At the end of the fifth turn and the ninth turn, the total military strength of each daimyo is calculated.
+The total military strength of a daimyo is increased by the sum of the force strengths of lords with whom he has the highest intimacy degree among all daimyo minus the sum of those with whom he has the lowest intimacy degree.
+When there are more than one daimyo with the highest or the lowest intimacy degree with a lord, the military strength of the lord divided by the number of such daimyo is added to or subtracted from the military strengths of the relevant daimyo.
+The military strength acquired at the fifth turn is kept afterwards and the military strength acquired at the ninth turn is added to it.
 
 ## Game Result
 
-The total military strength of a daimyo is, after the ninth turn, the sum of the military strengths of lords with whom he is the highest intimacy degree minus the sum of those with whom he is the lowest intimacy degree.
-The daimyo with the largest total military strength wins the game.
-
-When there are more than one daimyo with the highest or the lowest intimacy degree with a lord, the military strength of the lord divided by the number of such daimyo is added to or subtracted from the military strengths of the relevant daimyo.
+After the ninth turn, the daimyo with the largest total military strength wins the game.
 
 ## Input and Output Format of an AI Program
 
@@ -53,11 +54,11 @@ When it becomes ready to start a game, print `READY` to the standard output, and
 Then read current information each turn and outputs lords to negotiate with in that turn.
 
 The thinking time of an AI program is limited.
-If an AI program exceeds the limit, it will be terminated and its all actions will be regarded as "negotiate with the 0th lord" in the rest of the game.
+If an AI program exceeds the limit, it will be terminated and its actions will be always regarded as "negotiate with the 0th lord" in the rest of the game.
 
 ### Output Format of a Ready Message
 
-When your AI is ready to start a game, print `READY` to the standard output.
+When your AI becomes ready to start a game, print `READY` to the standard output.
 If a ready message is not printed within 5 seconds, the AI program will be terminated.
 
 ### Input Format of Game Settings
@@ -94,7 +95,7 @@ N<sub>0</sub> N<sub>1</sub> N<sub>2</sub> ... N<sub>5</sub>
 * P: "D" in a daytime turn, "N" in a nighttime turn.
 * I<sub>ij</sub>: The visible intimacy degree (only counting one increased in daytime turns) of the i-th lord to the j-th daimyo. Your AI player is the 0th daimyo. In the sixth turn and later turns, this number includes intimacy degree increased in nighttime turns before the fifth turn.
 * R<sub>i</sub>: The real intimacy degree (counting one increased in both daytime turns and nighttime turns) of the i-th lord to your AI player.
-* N<sub>i</sub>: The number of times the i-th lords has been negotiated in the previous nighttime turn. 
+* N<sub>i</sub>: The number of times the i-th lords has been negotiated with in the previous nighttime turn. 
 
 The last line R<sub>0</sub> R<sub>1</sub> R<sub>2</sub> ... R<sub>5</sub> appears only in daytime turns.
 
@@ -127,6 +128,7 @@ When you output `READY` at the start of the game or actions in each turn, be sur
 
 ## Pseudo Code
 
+    daimyo = (total_military_strength)
     lord = (military_strength, revealed_intimacy[4], real_intimacy[4])
 
     main:
@@ -160,10 +162,13 @@ When you output `READY` at the start of the game or actions in each turn, be sur
             for l in lords:
                 l.revealed_intimacy = l.real_intimacy
 
+        if turn == 5 or turn == 9:
+            calculate_total_military_strength
+
     is_daytime:
         turn % 2 == 1
 
-    finish:
+    calculate_total_military_strength:
         for l in lords:
             best_daimyos = daimyos.max_by(d -> l.real_intimacy[d])
             for d in best_daimyos:
@@ -173,4 +178,5 @@ When you output `READY` at the start of the game or actions in each turn, be sur
             for d in worst_daimyos:
                 d.total_military_strength -= l.military_strength / worst_daimyos.size
 
+    finish:
         winners = daimyos.max_by(d -> d.total_military_strength)
