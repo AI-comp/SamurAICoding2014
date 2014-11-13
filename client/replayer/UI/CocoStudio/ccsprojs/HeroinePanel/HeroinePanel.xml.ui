@@ -23,5 +23,5 @@
     <string>dummy.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>HeroinePanel.json</CurrentUIJson>
+  <CurrentUIJson>HeartLovePanel.json</CurrentUIJson>
 </UIProject>

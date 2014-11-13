@@ -86,7 +86,7 @@ res.image.info.hearts = addNumberedResources('info/heart', res.settings.playerRa
 res.image.info.revealedBars = addNumberedResources('info/bar/revealed', res.settings.playerRange, 'png');
 res.image.info.realBars = addNumberedResources('info/bar/real', res.settings.playerRange, 'png');
 res.image.info.enthusiasms = addNumberedResources('info/enthusiasm', _.range(3, 6 + 1), 'png');
-res.image.info.datedCounts = addNumberedResources('info/dated', _.range(1, 8 + 1), 'png');
+res.image.info.datedCounts = addNumberedResources('info/dated', _.range(8 + 1), 'png');
 res.image.info.playerBackgrounds = addNumberedResources('info/playerBackground', res.settings.playerRange, 'png');
 res.image.date.heroines = addNumberedResources('date/heroine', res.settings.heroineRange, 'png');
 addSecretResource(res.image.date.heroines, 'date/heroine', 'png');

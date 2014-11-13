@@ -256,9 +256,11 @@
         }
 
         Heroine.prototype.date = function (playerIndex, isWeekday) {
-            this.realLove[playerIndex] += 1;
             if (isWeekday) {
+                this.realLove[playerIndex] += 1;
                 this.revealedLove[playerIndex] += 1;
+            } else {
+                this.realLove[playerIndex] += 2;
             }
             this.datedCount += 1;
         };
