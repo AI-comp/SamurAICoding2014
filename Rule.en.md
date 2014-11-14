@@ -181,3 +181,4 @@ When you output `READY` at the start of the game or actions in each turn, be sur
 
     finish:
         winners = daimyos.max_by(d -> d.total_military_strength)
+        draw if winners.size > 1
