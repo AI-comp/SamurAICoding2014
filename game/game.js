@@ -158,7 +158,7 @@
 
             lines.push('Total Military Strength:');
             _.each(this.tmpRanking, function (player) {
-                lines.push('Daimyo ' + player.index + ': ' + player.getPopularity() + ' total military strength');
+                lines.push('Daimyo ' + player.index + ': ' + player.getPopularity());
             });
 
             return lines.join('\n') + '\n';
