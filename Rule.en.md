@@ -19,6 +19,7 @@ Game manager [pseudo code](#PseudoCode) is provided below.
 
 There are 4 daimyo and 6 noncommittal lords.
 Each player controls one daimyo.
+The total military strength of each daimyo is initially 0.
 The military force of each of the noncommittal lord is set randomly among  3, 4, 5, or 6, and made open.
 
 ### Game Turns and Negotiations
