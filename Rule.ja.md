@@ -183,3 +183,4 @@ L<sub>i</sub>: 交渉相手の領主の番号（0から5で指定）。L<sub>0</
 
     finish:
         winners = daimyos.max_by(d -> d.total_military_strength)
+        draw if winners.size > 1
