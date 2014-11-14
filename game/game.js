@@ -200,10 +200,11 @@
         };
 
         Game.prototype.getWinner = function () {
-            if (this.tmpRanking[0].getPopularity() == this.tmpRanking[1].getPopularity()) {
+            var ranking = this.getRanking();
+            if (ranking[0].getPopularity() == ranking[1].getPopularity()) {
                 return '';
             } else {
-                return this.tmpRanking[0].index;
+                return ranking[0].index;
             }
         };
 
