@@ -19,6 +19,7 @@ Game manager [pseudo code](#PseudoCode) is provided below.
 
 There are 4 daimyo and 6 noncommittal lords.
 Each player controls one daimyo.
+The total military strength of each daimyo is initially 0.
 The military force of each of the noncommittal lord is set randomly among  3, 4, 5, or 6, and made open.
 
 ### Game Turns and Negotiations
@@ -46,6 +47,7 @@ The military strength acquired at the fifth turn is kept afterwards and the mili
 ## Game Result
 
 After the ninth turn, the daimyo with the largest total military strength wins the game.
+The game is a draw when there are more than one daimyo with the largest total military strength.
 
 ## Input and Output Format of an AI Program
 
@@ -139,7 +141,7 @@ When you output `READY` at the start of the game or actions in each turn, be sur
         finish
 
     init:
-        daimyos = daimyo[4]
+        daimyos = daimyo[4] (0)
         lords = lord[6] (rand(3, 6), [0, 0, 0, 0], [0, 0, 0, 0])
         turn = 1
 
@@ -180,3 +182,4 @@ When you output `READY` at the start of the game or actions in each turn, be sur
 
     finish:
         winners = daimyos.max_by(d -> d.total_military_strength)
+        draw if winners.size > 1

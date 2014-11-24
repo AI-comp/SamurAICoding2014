@@ -19,6 +19,7 @@
         Game.prototype.initialize = function (numPlayers, numHeroines) {
             this.numPlayers = numPlayers || 4;
             this.populateHeroines(numHeroines || this.numPlayers * 1.5);
+            this.tmpRanking = this.getCurRanking();
         };
 
         Game.prototype.populateHeroines = function (numHeroines) {
@@ -72,6 +73,16 @@
             if (this.turn == 5) {
                 _.each(this.heroines, function (heroine) {
                     heroine.revealedLove = heroine.realLove.slice(0);
+                }, this);
+            }
+
+            if (this.turn == 5 || this.turn == 9) {
+                var newRanking = this.getCurRanking();
+                _.each(this.tmpRanking, function(tmpPlayer) {
+                    var newPlayer = _.find(newRanking, function(p) {
+                        return p.index == tmpPlayer.index;
+                    });
+                    tmpPlayer.addPopularity(newPlayer.getPopularity(), 1);
                 }, this);
             }
 
@@ -145,9 +156,9 @@
                 }).join(' '));
             }
 
-            lines.push('Ranking:');
-            _.each(this.getRanking(), function (player) {
-                lines.push('Daimyo ' + player.index + ': ' + player.getPopularity() + ' total military strength');
+            lines.push('Total Military Strength:');
+            _.each(this.tmpRanking, function (player) {
+                lines.push('Daimyo ' + player.index + ': ' + player.getPopularity());
             });
 
             return lines.join('\n') + '\n';
@@ -157,7 +168,7 @@
             return null;
         };
 
-        Game.prototype.getRanking = function () {
+        Game.prototype.getCurRanking = function () {
             var playersWithWinningPopularity = this.getPlayersWithTotalPopularity(true, true);
             var playersWithLosingPopularity = this.getPlayersWithTotalPopularity(false, true);
 
@@ -166,6 +177,10 @@
             });
 
             return playersWithWinningPopularity.sort(Player.compareTo);
+        };
+
+        Game.prototype.getRanking = function () {
+            return this.tmpRanking.sort(Player.compareTo);
         };
 
         Game.prototype.getPlayersWithTotalPopularity = function (winning, real) {
@@ -221,7 +236,7 @@
         }
 
         Player.compareTo = function (self, other) {
-            return self.integerPopularity > other.integerPopularity ? -1 : 1;
+            return self.integerPopularity < other.integerPopularity ? 1 : -1;
         };
 
         Player.prototype.addPopularity = function (numerator, denominator) {
