@@ -1,11 +1,11 @@
 import sys
 import random
 
-class Heroine:
-	def __init__(self, enthusiasm):
-		self.enthusiasm = enthusiasm
-		self.revealedLove = []
-		self.myRealLove = 0
+class Lord:
+	def __init__(self, militaryStrength):
+		self.militaryStrength = militaryStrength
+		self.revealedIntimacy = []
+		self.realIntimacy = 0
 
 def readLine():
 	return list(map(int, input().split()))
@@ -13,31 +13,31 @@ def readLine():
 print('READY')
 sys.stdout.flush()
 
-totalTurns, numPlayers, numHeroines = readLine()
-enthusiasm = readLine()
-heroines = []
-for i in range(numHeroines):
-	heroines.append(Heroine(enthusiasm[i]))
+totalTurns, numDaimyo, numLords = readLine()
+militaryStrength = readLine()
+lords = []
+for i in range(numLords):
+	lords.append(Lord(militaryStrength[i]))
 
 for t in range(totalTurns):
-	turn, day = input().split()
+	turn, time = input().split()
 	turn = int(turn)
 
-	for i in range(numHeroines):
-		heroines[i].revealedLove = readLine()
+	for i in range(numLords):
+		lords[i].revealedIntimacy = readLine()
 	
 	realLove = readLine()
-	for i in range(numHeroines):
-		heroines[i].myRealLove = realLove[i]
+	for i in range(numLords):
+		lords[i].realIntimacy = realLove[i]
 	
-	if day == 'W':
-		dated = readLine()
+	if time == 'D':
+		negotiationCount = readLine()
 	else:
-		dated = [0] * numHeroines
+		negotiationCount = [0] * numLords
 
 	command = []
-	for i in range({'W': 5, 'H': 2}[day]):
-		command.append(str(random.randrange(numHeroines)))
+	for i in range({'D': 5, 'N': 2}[time]):
+		command.append(str(random.randrange(numLords)))
 
 	print(' '.join(command))
 	sys.stdout.flush()

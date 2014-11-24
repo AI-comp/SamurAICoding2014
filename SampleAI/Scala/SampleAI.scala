@@ -8,32 +8,32 @@ import java.io.FileInputStream
 object SampleAI {
 
 	var allTurn = 0
-	var numPlayer = 0
-	var numHeroine = 0
+	var numDaimyo = 0
+	var numLord = 0
 
 	var turn = 0
-	var day = 'W'
+	var time = 'D'
 	var strategy = ListBuffer[Int]()
-	var heroines = List.empty[Heroine]
+	var lords = List.empty[Lord]
 	var real = List.empty[Int]
-	var dated = List.empty[Boolean]
+	var negotiationCount = List.empty[Int]
 
 	def main(args: Array[String]): Unit = {
 		println("READY")
 
 		var buf = Console.readLine.split(" ")
 		allTurn = buf(0).toInt
-		numPlayer = buf(1).toInt
-		numHeroine = buf(2).toInt
+		numDaimyo = buf(1).toInt
+		numLord = buf(2).toInt
 
-		Console.readLine.split(" ").foreach(f => heroines = new Heroine(f.toInt)::heroines)
-		heroines = heroines.reverse
+		Console.readLine.split(" ").foreach(f => lords = new Lord(f.toInt)::lords)
+		lords = lords.reverse
 
 		breakable{
 			while (true){
 				buf = Console.readLine.split(" ")
 				turn = buf(0).toInt
-				day = buf(1).head
+				time = buf(1).head
 				if (turn == -1){
 					break
 				}
@@ -45,19 +45,19 @@ object SampleAI {
 	}
 
 	def readIn(): Unit = {
-		heroines.foreach(h => {
+		lords.foreach(l => {
 			var values = List.empty[Int]
 			Console.readLine.split(" ").foreach(v => values = v.toInt::values)
 			values = values.reverse
-			h.updateValues(values)
+			l.updateValues(values)
 			
-			//h.revealSelf
+			//l.revealSelf
 		})
 		Console.readLine.split(" ").foreach(v => real = v.toInt::real)
 		real = real.reverse
-		if (day == 'W'){
-			Console.readLine.split(" ").foreach(v => dated = v.toInt::dated)
-			dated = dated.reverse
+		if (time == 'D'){
+			Console.readLine.split(" ").foreach(v => negotiationCount = v.toInt::negotiationCount)
+			negotiationCount = negotiationCount.reverse
 		}
 	}
 
@@ -67,12 +67,12 @@ object SampleAI {
 
 	def think(): Unit = {
 		strategy.clear
-		val num = if (day == 'W') 5 else 2
+		val num = if (time == 'D') 5 else 2
 		for (i <- 0 until num)
-			strategy += Random.nextInt(numHeroine)
+			strategy += Random.nextInt(numLord)
 	}
 	
-	class Heroine(p: Int){
+	class Lord(p: Int){
 		val property = p
 		var values = List.empty[Int]
 		

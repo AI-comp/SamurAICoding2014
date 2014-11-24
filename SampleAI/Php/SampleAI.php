@@ -3,11 +3,11 @@
 	$fp = fopen('php://stdin', 'r');
 	
 	$maxTurn;
-	$numOfPlayers;
-	$numOfHeroines;
+	$numOfDaimyo;
+	$numOfLords;
 	$turn;
-	$day;
-	$heroines = [];
+	$time;
+	$lords = [];
 	
 	echo 'READY';
 	readGameSetting();
@@ -18,96 +18,96 @@
 	}
 	
 	function readGameSetting() {
-		global $fp, $maxTurn, $numOfPlayers, $numOfHeroines, $heroines;
+		global $fp, $maxTurn, $numOfDaimyo, $numOfLords, $lords;
 		$gameSettings = explode(' ', rtrim(fgets($fp)));
 		$maxTurn = $gameSettings[0];
-		$numOfPlayers = $gameSettings[1];
-		$numOfHeroines = $gameSettings[2];
+		$numOfDaimyo = $gameSettings[1];
+		$numOfLords = $gameSettings[2];
 	
 		$gameSettings = explode(' ', rtrim(fgets($fp)));
-		foreach ($gameSettings as $enthusiasm) {
-			array_push($heroines, new Heroine((integer)$enthusiasm));
+		foreach ($gameSettings as $militaryStrength) {
+			array_push($lords, new Lord((integer)$militaryStrength));
 		}
 	}
 	
 	function readData() {
-		global $fp, $turn, $day, $numOfPlayers, $numOfHeroines, $heroines;
-		list($turn, $day) = explode(' ', rtrim(fgets($fp)));
-		for ($i = 0; $i < $numOfHeroines; $i++) {
-			$revealedScores = explode(' ', rtrim(fgets($fp)));
+		global $fp, $turn, $time, $numOfDaimyo, $numOfLords, $lords;
+		list($turn, $time) = explode(' ', rtrim(fgets($fp)));
+		for ($i = 0; $i < $numOfLords; $i++) {
+			$revealedIntimacy = explode(' ', rtrim(fgets($fp)));
 		}
-		$realScores = explode(' ', rtrim(fgets($fp)));
-		for ($i = 0; $i < $numOfHeroines; $i++) {
-			$heroines[$i]->setRealScore((integer)$realScores[$i]);
+		$realIntimacy = explode(' ', rtrim(fgets($fp)));
+		for ($i = 0; $i < $numOfLords; $i++) {
+			$lords[$i]->setRealIntimacy((integer)$realIntimacy[$i]);
 		}
-		if ($day === 'W') {
-			$dated = explode(' ', rtrim(fgets($fp)));
-			for ($i = 0; $i < $numOfHeroines; $i++) {
-				$heroines[$i]->setDated((integer)$dated[$i]);
+		if ($time === 'D') {
+			$negotiationCount = explode(' ', rtrim(fgets($fp)));
+			for ($i = 0; $i < $numOfLords; $i++) {
+				$lords[$i]->setNegotiationCount((integer)$negotiationCount[$i]);
 			}
 		}
 	}
 	
 	function writeCommand() {
-		global $numOfHeroines, $turn, $day;
+		global $numOfLords, $turn, $time;
 		$command = '';
-		if ($day === 'W') {
+		if ($time === 'D') {
 			for ($i = 0; $i < 5; $i++) {
-				$command = $command . mt_rand(0, $numOfHeroines - 1);
+				$command = $command . mt_rand(0, $numOfLords - 1);
 				if($i < 4) {
 					$command = $command . ' ';
 				}
 			}
 		} else {
-			$command = $command . mt_rand(0, $numOfHeroines - 1) . ' ' . mt_rand(0, $numOfHeroines - 1);
+			$command = $command . mt_rand(0, $numOfLords - 1) . ' ' . mt_rand(0, $numOfLords - 1);
 		}
 		
 		$command = $command . PHP_EOL;
 		echo $command;
 	}
 
-	class Heroine {
-		private $enthusiasm;
-		private $revealedScore;
-		private $realScore;
-		private $dated;
+	class Lord {
+		private $militaryStrength;
+		private $revealedIntimacy;
+		private $realIntimacy;
+		private $negotiationCount;
 		
-		function __construct($enthusiasm = 0, $revealedScore = 0, $realScore = 0, $dated = 0) {
-			$this->enthusiasm = $enthusiasm;
-			$this->revealedScore = $revealedScore;
-			$this->realScore = $realScore;
-			$this->dated = $dated;
+		function __construct($militaryStrength = 0, $revealedIntimacy = 0, $realIntimacy = 0, $negotiationCount = 0) {
+			$this->militaryStrength = $militaryStrength;
+			$this->revealedIntimacy = $revealedIntimacy;
+			$this->realIntimacy = $realIntimacy;
+			$this->negotiationCount = $negotiationCount;
 		}
 		
-		public function getEnthusiasm() {
-			return $this->enthusiasm;
+		public function getMilitaryStrength() {
+			return $this->militaryStrength;
 		}
 		
-		public function setEnthusiasm($enthusiasm) {
-			$this->enthusiasm = $enthusiasm;
+		public function setMilitaryStrength($militaryStrength) {
+			$this->militaryStrength = $militaryStrength;
 		}
 		
-		public function getRevealedScore() {
-			return $this->revealedScore;
+		public function getRevealedIntimacy() {
+			return $this->revealedIntimacy;
 		}
 		
-		public function setRevealedScore($revealedScore) {
-			$this->revealedScore = $revealedScore;
+		public function setRevealedIntimacy($revealedIntimacy) {
+			$this->revealedIntimacy = $revealedIntimacy;
 		}
 		
-		public function getRealScore() {
-			return $this->realScore;
+		public function getRealIntimacy() {
+			return $this->realIntimacy;
 		}
 		
-		public function setRealScore($realScore) {
-			$this->realScore = $realScore;
+		public function setRealIntimacy($realIntimacy) {
+			$this->realIntimacy = $realIntimacy;
 		}
 
-		public function getDated() {
-			return $this->dated;
+		public function getNegotiationCount() {
+			return $this->negotiationCount;
 		}
 		
-		public function setDated($dated) {
-			$this->dated = $dated;
+		public function setNegotiationCount($negotiationCount) {
+			$this->negotiationCount = $negotiationCount;
 		}
 	}

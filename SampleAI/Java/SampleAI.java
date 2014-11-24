@@ -3,9 +3,9 @@ import java.util.*;
 
 public class SampleAI {
 	private static Random random;
-	private static int maxTurn, turn, playersNum, languagesNum;
-	private static char day;
-	private static Language[] languages;
+	private static int maxTurn, turn, daimyoNum, lordsNum;
+	private static char time;
+	private static Lord[] lords;
 	private static Scanner scanner;
 	private static PrintWriter writer;
 
@@ -26,41 +26,41 @@ public class SampleAI {
 
 	private static void readInitialData() {
 		maxTurn = scanner.nextInt();
-		playersNum = scanner.nextInt();
-		languagesNum = scanner.nextInt();
-		languages = new Language[languagesNum];
-		for (int i = 0; i < languagesNum; i++) {
-			int attention = scanner.nextInt();
-			languages[i] = new Language(attention);
+		daimyoNum = scanner.nextInt();
+		lordsNum = scanner.nextInt();
+		lords = new Lord[lordsNum];
+		for (int i = 0; i < lordsNum; i++) {
+			int militaryStrength = scanner.nextInt();
+			lords[i] = new Lord(militaryStrength);
 		}
 	}
 
 	private static void readData() {
 		turn = scanner.nextInt();
-		day = scanner.next().charAt(0);
-		for (int i = 0; i < languagesNum; i++) {
-			int[] revealedScore = new int[playersNum];
-			for (int j = 0; j < playersNum; j++) {
-				revealedScore[j] = scanner.nextInt();
+		time = scanner.next().charAt(0);
+		for (int i = 0; i < lordsNum; i++) {
+			int[] revealedIntimacy = new int[daimyoNum];
+			for (int j = 0; j < daimyoNum; j++) {
+				revealedIntimacy[j] = scanner.nextInt();
 			}
-			languages[i].revealedScore = revealedScore;
+			lords[i].revealedIntimacy = revealedIntimacy;
 		}
-		for (int i = 0; i < languagesNum; i++) {
-			int realScore = scanner.nextInt();
-			languages[i].realScore = realScore;
+		for (int i = 0; i < lordsNum; i++) {
+			int realIntimacy = scanner.nextInt();
+			lords[i].realIntimacy = realIntimacy;
 		}
-		if (day == 'W') {
-			for (int i = 0; i < languagesNum; i++) {
-				int selectedTimes = scanner.nextInt();
-				languages[i].selectedTimes = selectedTimes;
+		if (time == 'D') {
+			for (int i = 0; i < lordsNum; i++) {
+				int negotiationCount = scanner.nextInt();
+				lords[i].negotiationCount = negotiationCount;
 			}
 		}
 	}
 
 	private static void writeCommand() {
 		StringBuilder command = new StringBuilder();
-		for (int i = 0; i < (day == 'W' ? 5 : 2); i++) {
-			int c = random.nextInt(languagesNum);
+		for (int i = 0; i < (time == 'D' ? 5 : 2); i++) {
+			int c = random.nextInt(lordsNum);
 			command.append(c);
 			if (i < 4) {
 				command.append(" ");
@@ -71,10 +71,10 @@ public class SampleAI {
 	}
 }
 
-class Language {
-	int attention, revealedScore[], realScore, selectedTimes;
+class Lord {
+	int militaryStrength, revealedIntimacy[], realIntimacy, negotiationCount;
 
-	Language(int attention) {
-		this.attention = attention;
+	Lord(int militaryStrength) {
+		this.militaryStrength = militaryStrength;
 	}
 }
