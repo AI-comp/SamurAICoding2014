@@ -7,9 +7,9 @@ Negotiate with noncommittal feudal lords to ally themselves with you and win a v
 
 ## Game Objective
 
-The objective of the game is to acquire _military force_ by increasing the _intimacy degree_ of _noncommittal lords_ through _negotiation_ and to be the one with the largest _total military strength_ among all _daimyo_.
+The objective of the game is to acquire _military force_ by increasing the _intimacy degree_ of noncommittal _lords_ through _negotiation_ and to be the one with the largest _total military strength_ among all _daimyo_.
 Each daimyo gains military strength at the middle and the end of the game.
-At each moment, the total military strength of a daimyo is increased by the sum of the _force strengths_ of lords with whom he is the most intimate among all daimyo subtracted by the sum of those with whom he is the least intimate.
+At each moment, each lord supports the daimyo with the largest initimacy degree, increasing the daimyo's total military strength by the lord's _force strengths_, and attacks the daimyo with the smallest initimacy degree, decreasing the daimyo's total military strength by the lord's force strengths.
 
 ## Game Process
 
@@ -17,20 +17,23 @@ Game manager [pseudo code](#PseudoCode) is provided below.
 
 ### Initial Setting
 
-There are 4 daimyo and 6 noncommittal lords.
+There are 4 daimyo and 6 lords.
 Each player controls one daimyo.
 The total military strength of each daimyo is initially 0.
-The military force of each of the noncommittal lord is set randomly among  3, 4, 5, or 6, and made open.
+Each lord is neutral and their intimacy degree with each daimyo is 0.
+The military force of each of the lord is set randomly among 3, 4, 5, or 6, and made open.
 
 ### Game Turns and Negotiations
 
 One game consists of 9 turns: alternatingly held 5 _daytime turns_ and 4 _nighttime turns_.
 The first turn is a daytime turn.
 
-On each turn, each of the daimyo chooses one or more noncommittal lords to have negotiation with.
+On each turn, each of the daimyo chooses one or more lords to have negotiation with.
 Five times of negotiation are made on daytime turns, and two times on nighttime turns.
 A daimyo can have negotiation with the same lord for more than once on a single turn.
-The intimacy degree of a lord with a daimyo is the sum of the number of times the daimyo had negotiation with the lord on daytime turns and twice the number of times of such negotiation on nighttime turns.
+In daytime turns, the intimacy degree of a lord with a daimyo is increased by the number of times the daimyo had negotiation with the lord.
+In nighttime turns, it is increased by twice the number of times the daimyo had negotiation with the lord.
+Intimacy degree is increased each time, and will never be decreased.
 
 After each of the daytime turns, all the information are made open: which daimyo had negotiation with which lord and how many times.
 After each of the nighttime turns, the number of times each of the lords had negotiation is made open, but which of the daimyo had negotiation is kept secret.
@@ -39,9 +42,10 @@ At the end of the fifth turn (the third daytime turn), the so-far-concealed info
 
 ### Calculation of Total Military Strength
 
-At the end of the fifth turn and the ninth turn, the total military strength of each daimyo is calculated.
-The total military strength of a daimyo is increased by the sum of the force strengths of lords with whom he has the highest intimacy degree among all daimyo minus the sum of those with whom he has the lowest intimacy degree.
+At the end of the fifth turn and the ninth turn, lords take action to change the total military strength of each daimyo.
+Each lord supports the daimyo with the largest initimacy degree, increasing the daimyo's total military strength by the lord's force strengths, and attacks the daimyo with the smallest initimacy degree, decreasing the daimyo's total military strength by the lord's force strengths.
 When there are more than one daimyo with the highest or the lowest intimacy degree with a lord, the military strength of the lord divided by the number of such daimyo is added to or subtracted from the military strengths of the relevant daimyo.
+The total strength of a daimyo can also take negative values.
 The military strength acquired at the fifth turn is kept afterwards and the military strength acquired at the ninth turn is added to it.
 
 ## Game Result
