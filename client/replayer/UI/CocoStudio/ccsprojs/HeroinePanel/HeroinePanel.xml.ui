@@ -19,7 +19,9 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath>\\..\\..\\assets</ResRelativePath>
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>dummy.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>BarLovePanel.json</CurrentUIJson>
+  <CurrentUIJson>HeroinePanel.json</CurrentUIJson>
 </UIProject>
