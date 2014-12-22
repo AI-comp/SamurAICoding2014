@@ -77,7 +77,7 @@ function addSecretResource(list, directory, extension) {
 }
 
 res.settings.playerRange = _.range(4);
-res.settings.heroineRange = _.range(9);
+res.settings.heroineRange = _.range(8);
 res.settings.backgroundRange = _.range(10);
 
 res.image.info.heroines = addNumberedResources('info/heroine', res.settings.heroineRange, 'png');
