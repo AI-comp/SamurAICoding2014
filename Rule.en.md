@@ -9,7 +9,7 @@ Negotiate with noncommittal feudal lords to ally themselves with you and win a v
 
 The objective of the game is to acquire _military force_ by increasing the _intimacy degree_ of noncommittal _lords_ through _negotiation_ and to be the one with the largest _total military strength_ among all _daimyo_.
 Each daimyo gains military strength at the middle and the end of the game.
-At each moment, each lord supports the daimyo with the largest initimacy degree, increasing the daimyo's total military strength by the lord's _force strengths_, and attacks the daimyo with the smallest initimacy degree, decreasing the daimyo's total military strength by the lord's force strengths.
+Each of the lords supports the daimyo with the highest intimacy degree at battles, increasing the total military strength of that daimyo by the lord's _force strength_, while opposing one with the lowest intimacy, decreasing its total military strength with the same amount.
 
 ## Game Process
 
@@ -20,8 +20,8 @@ Game manager [pseudo code](#PseudoCode) is provided below.
 There are 4 daimyo and 6 lords.
 Each player controls one daimyo.
 The total military strength of each daimyo is initially 0.
-Each lord is neutral and their intimacy degree with each daimyo is 0.
-The military force of each of the lord is set randomly among 3, 4, 5, or 6, and made open.
+Each lord is neutral and their intimacy degree with their intimacy degrees with all the daimyo are 0.
+The military force of each of the lords is set randomly among 3, 4, 5, or 6, and made open.
 
 ### Game Turns and Negotiations
 
@@ -29,7 +29,7 @@ One game consists of 9 turns: alternatingly held 5 _daytime turns_ and 4 _nightt
 The first turn is a daytime turn.
 
 On each turn, each of the daimyo chooses one or more lords to have negotiation with.
-Five times of negotiation are made on daytime turns, and two times on nighttime turns.
+Five times of negotiation are made on a daytime turn, and two times on a nighttime turn.
 A daimyo can have negotiation with the same lord for more than once on a single turn.
 In daytime turns, the intimacy degree of a lord with a daimyo is increased by the number of times the daimyo had negotiation with the lord.
 In nighttime turns, it is increased by twice the number of times the daimyo had negotiation with the lord.
@@ -42,15 +42,15 @@ At the end of the fifth turn (the third daytime turn), the so-far-concealed info
 
 ### Calculation of Total Military Strength
 
-At the end of the fifth turn and the ninth turn, lords take action to change the total military strength of each daimyo.
-Each lord supports the daimyo with the largest initimacy degree, increasing the daimyo's total military strength by the lord's force strengths, and attacks the daimyo with the smallest initimacy degree, decreasing the daimyo's total military strength by the lord's force strengths.
+At the end of the fifth turn and the final (ninth) turn, lords take action to change the total military strength of each daimyo.
+Each lord supports the daimyo with the largest initimacy degree, increasing the daimyo's total military strength by the lord's force strengths, and opposes the daimyo with the smallest initimacy degree, decreasing the daimyo's total military strength by the lord's force strengths.
 When there are more than one daimyo with the highest or the lowest intimacy degree with a lord, the military strength of the lord divided by the number of such daimyo is added to or subtracted from the military strengths of the relevant daimyo.
-The total strength of a daimyo can also take negative values.
-The military strength acquired at the fifth turn is kept afterwards and the military strength acquired at the ninth turn is added to it.
+The total strength of a daimyo can take negative values.
+The military strength acquired at the end of the fifth turn is kept and the military strength acquired at the end of the the ninth turn is added to it.
 
 ## Game Result
 
-After the ninth turn, the daimyo with the largest total military strength wins the game.
+After all the ninth turns, the daimyo with the largest total military strength wins the game.
 The game is a draw when there are more than one daimyo with the largest total military strength.
 
 ## Input and Output Format of an AI Program
@@ -101,7 +101,7 @@ N<sub>0</sub> N<sub>1</sub> N<sub>2</sub> ... N<sub>5</sub>
 * P: "D" in a daytime turn, "N" in a nighttime turn.
 * I<sub>ij</sub>: The visible intimacy degree (only counting one increased in daytime turns) of the i-th lord to the j-th daimyo. Your AI player is the 0th daimyo. In the sixth turn and later turns, this number includes intimacy degree increased in nighttime turns before the fifth turn.
 * R<sub>i</sub>: The real intimacy degree (counting one increased in both daytime turns and nighttime turns) of the i-th lord to your AI player.
-* N<sub>i</sub>: The number of times the i-th lords has been negotiated with in the previous nighttime turn. 
+* N<sub>i</sub>: The number of times the i-th lords has been negotiated with in the previous nighttime turn.
 
 The last line R<sub>0</sub> R<sub>1</sub> R<sub>2</sub> ... R<sub>5</sub> appears only in daytime turns.
 
@@ -114,7 +114,7 @@ Print lords to negotiate with in that turn to the standard output with the follo
   <pre>
   L<sub>0</sub> L<sub>1</sub> L<sub>2</sub> L<sub>3</sub> L<sub>4</sub>
   </pre>
-  
+
 * __Nighttime Turn__
 
   <pre>
