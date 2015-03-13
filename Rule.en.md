@@ -42,7 +42,7 @@ At the end of the fifth turn (the third daytime turn), the so-far-concealed info
 
 ### Calculation of Total Military Strength
 
-At the end of the fifth turn and the final (ninth) turn, lords take action to change the total military strength of each daimyo.
+At the end of the fifth turn and the ninth (final) turn, lords take action to change the total military strength of each daimyo.
 Each lord supports the daimyo with the largest initimacy degree, increasing the daimyo's total military strength by the lord's force strengths, and opposes the daimyo with the smallest initimacy degree, decreasing the daimyo's total military strength by the lord's force strengths.
 When there are more than one daimyo with the highest or the lowest intimacy degree with a lord, the military strength of the lord divided by the number of such daimyo is added to or subtracted from the military strengths of the relevant daimyo.
 The total strength of a daimyo can take negative values.
@@ -50,7 +50,7 @@ The military strength acquired at the end of the fifth turn is kept and the mili
 
 ## Game Result
 
-After all the ninth turns, the daimyo with the largest total military strength wins the game.
+After all the nine turns, the daimyo with the largest total military strength wins the game.
 The game is a draw when there are more than one daimyo with the largest total military strength.
 
 ## Input and Output Format of an AI Program
