@@ -11,10 +11,8 @@ var MainScene = InformationScene.extend({
     setupPlayerPanels: function () {
         this._super();
 
-        var real = this.getLovePanelMode() == ReplayerScene.BAR_LOVE_PANEL_MODE;
-        var playersWithWinningPopularity = this.game.getPlayersWithTotalPopularity(true, real);
-        var playersWithLosingPopularity = this.game.getPlayersWithTotalPopularity(false, real);
-        var largestPopularity = Math.max(Game.getLargestPopularity(playersWithWinningPopularity), Game.getLargestPopularity(playersWithLosingPopularity));
+        var players = this.game.tmpRanking;
+        var largestPopularity = Game.getLargestPopularity(players);
         largestPopularity = largestPopularity <= 15 ? 15 : largestPopularity <= 30 ? 30 : 45;
 
         _(this.game.getNumPlayers()).times(function (playerIndex) {
@@ -26,8 +24,9 @@ var MainScene = InformationScene.extend({
             var losingPopularityBar = playerPanel.getChildByName('LosingPopularityBar');
             winningPopularityBar.loadTexture(res.image.info.winningPopularityBar);
             losingPopularityBar.loadTexture(res.image.info.losingPopularityBar);
-            winningPopularityBar.setPercent(playersWithWinningPopularity[playerIndex].getPopularity() / largestPopularity * 100);
-            losingPopularityBar.setPercent(playersWithLosingPopularity[playerIndex].getPopularity() / largestPopularity * 100);
+            var popularity = players[playerIndex].getPopularity();
+            winningPopularityBar.setPercent(Math.max(popularity, 0) / largestPopularity * 100);
+            losingPopularityBar.setPercent(Math.max(-popularity, 0) / largestPopularity * 100);
         }, this);
     },
 
